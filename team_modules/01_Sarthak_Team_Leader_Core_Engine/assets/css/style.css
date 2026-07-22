@@ -1,0 +1,349 @@
+/* ============================================================
+ * CIY - Cook It Yourself (Design System & Master Stylesheet)
+ * Apple Glassmorphism + Spotify & Pinterest Aesthetic
+ * ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Brand Color Tokens */
+  --primary: #FF6B35;
+  --primary-hover: #E85A24;
+  --primary-light: rgba(255, 107, 53, 0.12);
+  --secondary: #FFB703;
+  --accent: #F94144;
+  
+  /* Neutral Color Tokens (Light Mode Defaults) */
+  --bg-main: #F8FAFC;
+  --bg-card: rgba(255, 255, 255, 0.72);
+  --bg-card-solid: #FFFFFF;
+  --bg-glass: rgba(255, 255, 255, 0.65);
+  --text-main: #111827;
+  --text-muted: #6B7280;
+  --text-inverse: #FFFFFF;
+  --border-glass: rgba(255, 255, 255, 0.8);
+  --border-subtle: rgba(229, 231, 235, 0.7);
+  --shadow-glass: 0 20px 40px -15px rgba(0, 0, 0, 0.07), 0 0 15px rgba(255, 255, 255, 0.5) inset;
+  --shadow-hover: 0 25px 50px -12px rgba(255, 107, 53, 0.25);
+  
+  /* Typography */
+  --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Glass Blur Radius */
+  --blur-glass: blur(18px);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --radius-pill: 9999px;
+  --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+  --bg-main: #0B0F17;
+  --bg-card: rgba(23, 31, 46, 0.75);
+  --bg-card-solid: #131B2A;
+  --bg-glass: rgba(17, 24, 39, 0.75);
+  --text-main: #F9FAFB;
+  --text-muted: #9CA3AF;
+  --border-glass: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --shadow-glass: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.03) inset;
+}
+
+/* --- Global Reset & Typography --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+/* --- Glassmorphism Base Component --- */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  transition: var(--transition);
+}
+
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.glass-nav {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 1240px;
+  z-index: 1000;
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-pill);
+  padding: 12px 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+}
+
+/* --- Floating Navbar & Brand --- */
+.navbar-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--primary);
+}
+
+.navbar-brand-logo i {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.6rem;
+}
+
+.nav-link-ciy {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  transition: var(--transition);
+}
+
+.nav-link-ciy:hover, .nav-link-ciy.active {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+/* --- Buttons --- */
+.btn-ciy-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, #F94144 100%);
+  color: #FFFFFF !important;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  border: none;
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+
+}
+
+.btn-ciy-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(255, 107, 53, 0.45);
+}
+
+.btn-ciy-outline {
+  background: transparent;
+  color: var(--text-main);
+  border: 1.5px solid var(--border-subtle);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: var(--radius-pill);
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-ciy-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+/* --- Recipe Card Styling --- */
+.recipe-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: var(--blur-glass);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.recipe-card-img-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 70%; /* 16:9 ratio */
+  overflow: hidden;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.recipe-card-img-wrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.recipe-card:hover .recipe-card-img-wrap img {
+  transform: scale(1.08);
+}
+
+.recipe-badge-time {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(10px);
+  color: #FFF;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-bookmark-floating {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: none;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.btn-bookmark-floating:hover, .btn-bookmark-floating.active {
+  background: var(--accent);
+  color: #FFF;
+  transform: scale(1.1);
+}
+
+.recipe-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.recipe-author-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.recipe-author-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* --- Hero Section --- */
+.hero-wrapper {
+  position: relative;
+  padding: 140px 0 60px 0;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #111827 0%, var(--primary) 50%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+[data-theme="dark"] .hero-title {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--primary) 50%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- Fullscreen Interactive Cooking Mode Modal --- */
+.cooking-mode-modal .modal-content {
+  background: var(--bg-main);
+  border: none;
+  border-radius: var(--radius-lg);
+
+}
+
+.cooking-timer-box {
+  background: var(--primary-light);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  text-align: center;
+}
+
+.cooking-timer-display {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991px) {
+  .hero-title { font-size: 2.5rem; }
+  .glass-nav {
+    border-radius: 20px;
+    padding: 10px 18px;
+  }
+}
