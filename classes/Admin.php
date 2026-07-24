@@ -37,9 +37,9 @@ class Admin {
      */
     public function getMonthlyUploadStats(): array {
         $stmt = $this->db->query("
-            SELECT DATE_FORMAT(created_at, '%b %Y') AS month_label, COUNT(*) AS total
+            SELECT strftime('%m/%Y', created_at) AS month_label, COUNT(*) AS total
             FROM recipes
-            GROUP BY YEAR(created_at), MONTH(created_at)
+            GROUP BY strftime('%Y-%m', created_at)
             ORDER BY created_at ASC
             LIMIT 12
         ");

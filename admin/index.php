@@ -17,7 +17,7 @@ $adminEngine = new Admin();
 $stats = $adminEngine->getDashboardStats();
 $monthlyData = $adminEngine->getMonthlyUploadStats();
 
-$pageTitle = 'Admin Dashboard - CIY';
+$pageTitle = t('admin_panel') . ' - CIY Dashboard';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/navbar.php';
 ?>
@@ -25,12 +25,12 @@ require_once __DIR__ . '/../includes/navbar.php';
 <div class="container py-5 my-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
         <div>
-            <h2 class="font-heading fw-bold mb-1"><i class="fa-solid fa-shield-halved text-danger me-2"></i> Admin Overview</h2>
+            <h2 class="font-heading fw-bold mb-1"><i class="fa-solid fa-shield-halved text-danger me-2"></i> <?= t('admin_panel') ?></h2>
             <p class="text-muted small">Platform analytics & moderation management</p>
         </div>
         <div class="d-flex gap-2">
-            <a href="<?= BASE_URL ?>/admin/users.php" class="btn-ciy-outline btn-sm"><i class="fa-solid fa-users me-1"></i> Users</a>
-            <a href="<?= BASE_URL ?>/admin/recipes.php" class="btn-ciy-outline btn-sm"><i class="fa-solid fa-utensils me-1"></i> Recipes</a>
+            <a href="<?= BASE_URL ?>/admin/users.php" class="btn-ciy-outline btn-sm"><i class="fa-solid fa-users me-1"></i> <?= t('followers') ?></a>
+            <a href="<?= BASE_URL ?>/admin/recipes.php" class="btn-ciy-outline btn-sm"><i class="fa-solid fa-utensils me-1"></i> <?= t('explore') ?></a>
         </div>
     </div>
 
@@ -40,28 +40,28 @@ require_once __DIR__ . '/../includes/navbar.php';
             <div class="glass-card p-4 text-center">
                 <i class="fa-solid fa-users text-primary fs-2 mb-2"></i>
                 <h3 class="font-heading fw-bold mb-0"><?= $stats['users'] ?></h3>
-                <small class="text-muted">Total Users</small>
+                <small class="text-muted"><?= t('followers') ?></small>
             </div>
         </div>
         <div class="col-6 col-md-3">
             <div class="glass-card p-4 text-center">
                 <i class="fa-solid fa-utensils text-success fs-2 mb-2"></i>
                 <h3 class="font-heading fw-bold mb-0"><?= $stats['recipes'] ?></h3>
-                <small class="text-muted">Active Recipes</small>
+                <small class="text-muted"><?= t('explore') ?></small>
             </div>
         </div>
         <div class="col-6 col-md-3">
             <div class="glass-card p-4 text-center">
                 <i class="fa-solid fa-heart text-danger fs-2 mb-2"></i>
                 <h3 class="font-heading fw-bold mb-0"><?= $stats['likes'] ?></h3>
-                <small class="text-muted">Total Likes</small>
+                <small class="text-muted">Likes</small>
             </div>
         </div>
         <div class="col-6 col-md-3">
             <div class="glass-card p-4 text-center">
                 <i class="fa-solid fa-flag text-warning fs-2 mb-2"></i>
                 <h3 class="font-heading fw-bold mb-0"><?= $stats['pending_reports'] ?></h3>
-                <small class="text-muted">Pending Reports</small>
+                <small class="text-muted">Reports</small>
             </div>
         </div>
     </div>
