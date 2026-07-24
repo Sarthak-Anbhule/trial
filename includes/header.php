@@ -5,13 +5,14 @@
  */
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/helpers.php';
+require_once __DIR__ . '/../config/i18n.php';
 require_once __DIR__ . '/../classes/Auth.php';
 
 $currentUser = Auth::user();
 $pageTitle = $pageTitle ?? APP_NAME;
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="<?= CURRENT_LANG ?>" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

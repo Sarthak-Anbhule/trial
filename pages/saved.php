@@ -7,7 +7,6 @@
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/helpers.php';
 require_once __DIR__ . '/../classes/Auth.php';
-require_once __DIR__ . '/../classes/Database.php';
 require_once __DIR__ . '/../classes/Recipe.php';
 
 if (!Auth::check()) {
@@ -34,15 +33,15 @@ $stmt = $db->prepare("
 $stmt->execute([':uid' => $currentUserId]);
 $savedRecipes = $stmt->fetchAll();
 
-$pageTitle = 'Saved Recipes - CIY';
+$pageTitle = t('saved_recipes') . ' - CIY';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/navbar.php';
 ?>
 
 <div class="container py-5 my-4">
     <div class="mb-4">
-        <h2 class="font-heading fw-bold mb-1"><i class="fa-solid fa-bookmark text-warning me-2"></i> Saved Bookmarks</h2>
-        <p class="text-muted">Your personal collection of saved recipes</p>
+        <h2 class="font-heading fw-bold mb-1"><i class="fa-solid fa-bookmark text-warning me-2"></i> <?= t('saved_recipes') ?></h2>
+        <p class="text-muted"><?= t('saved_recipes_subtitle', 'Your personal collection of saved recipes') ?></p>
     </div>
 
     <?php if (!empty($savedRecipes)): ?>
@@ -56,9 +55,9 @@ require_once __DIR__ . '/../includes/navbar.php';
     <?php else: ?>
         <div class="glass-card text-center py-5">
             <i class="fa-regular fa-bookmark text-muted display-3 mb-3"></i>
-            <h5 class="font-heading fw-bold">No Saved Recipes Yet</h5>
-            <p class="text-muted small">Explore recipes and click the bookmark icon to save them here.</p>
-            <a href="<?= BASE_URL ?>/pages/explore.php" class="btn-ciy-primary btn-sm mt-2">Explore Recipes</a>
+            <h5 class="font-heading fw-bold"><?= t('no_saved_recipes') ?></h5>
+            <p class="text-muted small"><?= t('explore_recipes_to_save', 'Explore recipes and click the bookmark icon to save them here.') ?></p>
+            <a href="<?= BASE_URL ?>/pages/explore.php" class="btn-ciy-primary btn-sm mt-2"><?= t('hero_btn_explore') ?></a>
         </div>
     <?php endif; ?>
 </div>

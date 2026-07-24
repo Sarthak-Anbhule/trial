@@ -38,8 +38,8 @@ require_once __DIR__ . '/../includes/navbar.php';
 <div class="container py-5 my-4">
     <!-- Header Title -->
     <div class="mb-4">
-        <h2 class="font-heading fw-bold mb-1">Explore Recipes</h2>
-        <p class="text-muted">Discover <?= $results['total'] ?> delicious recipes curated for you</p>
+        <h2 class="font-heading fw-bold mb-1"><?= t('explore') ?></h2>
+        <p class="text-muted"><?= $results['total'] ?> recipes found</p>
     </div>
 
     <!-- Search & Filter Controls -->
@@ -48,39 +48,38 @@ require_once __DIR__ . '/../includes/navbar.php';
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="fa-solid fa-magnifying-glass"></i></span>
-                    <input type="text" name="search" class="form-control glass-card border-start-0" placeholder="Search recipe or ingredient..." value="<?= e($searchParams['search']) ?>">
+                    <input type="text" name="search" class="form-control glass-card border-start-0" placeholder="<?= t('search_placeholder') ?>" value="<?= e($searchParams['search']) ?>">
                 </div>
             </div>
 
             <div class="col-6 col-md-2">
                 <select name="category" class="form-select glass-card">
-                    <option value="">All Categories</option>
+                    <option value=""><?= t('all_categories') ?></option>
                     <?php foreach ($categories as $cat): ?>
-                        <option value="<?= e($cat['slug']) ?>" <?= $searchParams['category'] === $cat['slug'] ? 'selected' : '' ?>><?= e($cat['name']) ?></option>
+                        <option value="<?= e($cat['slug']) ?>" <?= $searchParams['category'] === $cat['slug'] ? 'selected' : '' ?>><?= t(slugify($cat['name']), e($cat['name'])) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
 
             <div class="col-6 col-md-2">
                 <select name="difficulty" class="form-select glass-card">
-                    <option value="">Any Difficulty</option>
-                    <option value="easy" <?= $searchParams['difficulty'] === 'easy' ? 'selected' : '' ?>>Easy</option>
-                    <option value="medium" <?= $searchParams['difficulty'] === 'medium' ? 'selected' : '' ?>>Medium</option>
-                    <option value="hard" <?= $searchParams['difficulty'] === 'hard' ? 'selected' : '' ?>>Hard</option>
+                    <option value=""><?= t('difficulty') ?></option>
+                    <option value="easy" <?= $searchParams['difficulty'] === 'easy' ? 'selected' : '' ?>><?= t('easy') ?></option>
+                    <option value="medium" <?= $searchParams['difficulty'] === 'medium' ? 'selected' : '' ?>><?= t('medium') ?></option>
+                    <option value="hard" <?= $searchParams['difficulty'] === 'hard' ? 'selected' : '' ?>><?= t('hard') ?></option>
                 </select>
             </div>
 
             <div class="col-6 col-md-2">
                 <select name="sort" class="form-select glass-card">
-                    <option value="latest" <?= $searchParams['sort'] === 'latest' ? 'selected' : '' ?>>Newest</option>
-                    <option value="popular" <?= $searchParams['sort'] === 'popular' ? 'selected' : '' ?>>Most Viewed</option>
-                    <option value="likes" <?= $searchParams['sort'] === 'likes' ? 'selected' : '' ?>>Most Liked</option>
-                    <option value="fastest" <?= $searchParams['sort'] === 'fastest' ? 'selected' : '' ?>>Fastest Cook Time</option>
+                    <option value="latest" <?= $searchParams['sort'] === 'latest' ? 'selected' : '' ?>><?= t('sort_latest') ?></option>
+                    <option value="popular" <?= $searchParams['sort'] === 'popular' ? 'selected' : '' ?>><?= t('sort_popular') ?></option>
+                    <option value="rating" <?= $searchParams['sort'] === 'rating' ? 'selected' : '' ?>><?= t('sort_rating') ?></option>
                 </select>
             </div>
 
             <div class="col-6 col-md-2">
-                <button type="submit" class="btn-ciy-primary w-100 py-2">Filter</button>
+                <button type="submit" class="btn-ciy-primary w-100 py-2"><i class="fa-solid fa-filter me-1"></i> <?= t('filter_results') ?></button>
             </div>
         </form>
     </div>

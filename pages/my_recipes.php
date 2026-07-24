@@ -25,7 +25,7 @@ if (isset($_GET['delete_id'])) {
     }
 }
 
-$pageTitle = 'My Recipes - CIY';
+$pageTitle = t('my_recipes') . ' - CIY';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/navbar.php';
 ?>
@@ -33,10 +33,10 @@ require_once __DIR__ . '/../includes/navbar.php';
 <div class="container py-5 my-4">
     <div class="d-flex align-items-center justify-content-between mb-4">
         <div>
-            <h2 class="font-heading fw-bold mb-1"><i class="fa-solid fa-utensils text-primary me-2"></i> My Recipes</h2>
-            <p class="text-muted small">Manage your uploaded culinary dishes</p>
+            <h2 class="font-heading fw-bold mb-1"><i class="fa-solid fa-utensils text-primary me-2"></i> <?= t('my_recipes') ?></h2>
+            <p class="text-muted small"><?= t('my_recipes_subtitle', 'Manage your uploaded culinary dishes') ?></p>
         </div>
-        <a href="<?= BASE_URL ?>/pages/upload.php" class="btn-ciy-primary btn-sm"><i class="fa-solid fa-plus me-1"></i> Upload New</a>
+        <a href="<?= BASE_URL ?>/pages/upload.php" class="btn-ciy-primary btn-sm"><i class="fa-solid fa-plus me-1"></i> <?= t('create_recipe') ?></a>
     </div>
 
     <?php if (!empty($myRecipes)): ?>
@@ -45,8 +45,8 @@ require_once __DIR__ . '/../includes/navbar.php';
                 <div class="col-md-6 col-lg-4 position-relative">
                     <?php include __DIR__ . '/../components/recipe_card.php'; ?>
                     <div class="mt-2 text-end">
-                        <a href="?delete_id=<?= $recipe['id'] ?>" class="btn btn-outline-danger btn-sm rounded-pill" onclick="return confirm('Are you sure you want to delete this recipe?')">
-                            <i class="fa-solid fa-trash me-1"></i> Delete
+                        <a href="?delete_id=<?= $recipe['id'] ?>" class="btn btn-outline-danger btn-sm rounded-pill" onclick="return confirm('<?= t('confirm_delete', 'Are you sure you want to delete this recipe?') ?>')">
+                            <i class="fa-solid fa-trash me-1"></i> <?= t('delete', 'Delete') ?>
                         </a>
                     </div>
                 </div>
@@ -54,8 +54,8 @@ require_once __DIR__ . '/../includes/navbar.php';
         </div>
     <?php else: ?>
         <div class="glass-card text-center py-5">
-            <h5 class="font-heading fw-bold">You haven't uploaded any recipes yet.</h5>
-            <a href="<?= BASE_URL ?>/pages/upload.php" class="btn-ciy-primary btn-sm mt-3">Upload Recipe Studio</a>
+            <h5 class="font-heading fw-bold"><?= t('no_my_recipes') ?></h5>
+            <a href="<?= BASE_URL ?>/pages/upload.php" class="btn-ciy-primary btn-sm mt-3"><?= t('create_recipe') ?></a>
         </div>
     <?php endif; ?>
 </div>

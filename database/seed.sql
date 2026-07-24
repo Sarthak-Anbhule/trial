@@ -11,10 +11,10 @@ USE `ciy_db`;
 -- SEED USERS
 -- ------------------------------------------------------------
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `avatar`, `cover_image`, `bio`, `role`, `status`) VALUES
-(1, 'Sarthak Anbhule', 'foodie_sarthak', 'sarthak@ciy.com', '$2y$10$4y9pB/U/r.r4Nn4T3L9s.eWw5jG4d8n6p7q8r9s0t1u2v3w4x5y6z', 'chef_sarthak.jpg', 'cover_sarthak.jpg', 'Cooking is my passion & sharing is my happiness ❤️ Senior Culinary Designer & Food Photographer.', 'chef', 'active'),
-(2, 'Chef Emma Watson', 'chef_emma', 'emma@ciy.com', '$2y$10$4y9pB/U/r.r4Nn4T3L9s.eWw5jG4d8n6p7q8r9s0t1u2v3w4x5y6z', 'chef_emma.jpg', 'cover_emma.jpg', 'Michelin star trained chef specializing in modern Italian pasta and Parisian patisserie.', 'chef', 'active'),
-(3, 'Gordon Ramsay', 'chef_gordon', 'gordon@ciy.com', '$2y$10$4y9pB/U/r.r4Nn4T3L9s.eWw5jG4d8n6p7q8r9s0t1u2v3w4x5y6z', 'chef_gordon.jpg', 'cover_gordon.jpg', 'Mastering flavor profile, techniques, and precision cooking. Cook it right!', 'chef', 'active'),
-(4, 'Admin User', 'admin_ciy', 'admin@ciy.com', '$2y$10$4y9pB/U/r.r4Nn4T3L9s.eWw5jG4d8n6p7q8r9s0t1u2v3w4x5y6z', 'default_avatar.jpg', 'default_cover.jpg', 'CIY Platform Administrator.', 'admin', 'active');
+(1, 'Sarthak Anbhule', 'foodie_sarthak', 'sarthak@ciy.com', '$2y$10$YhQAqrV3MzFtCl6lm/jv7.98CHu1tlUul2Mk2uCx5o3Q7wbQeHLdq', 'chef_sarthak.jpg', 'cover_sarthak.jpg', 'Cooking is my passion & sharing is my happiness ❤️ Senior Culinary Designer & Food Photographer.', 'chef', 'active'),
+(2, 'Chef Emma Watson', 'chef_emma', 'emma@ciy.com', '$2y$10$YhQAqrV3MzFtCl6lm/jv7.98CHu1tlUul2Mk2uCx5o3Q7wbQeHLdq', 'chef_emma.jpg', 'cover_emma.jpg', 'Michelin star trained chef specializing in modern Italian pasta and Parisian patisserie.', 'chef', 'active'),
+(3, 'Gordon Ramsay', 'chef_gordon', 'gordon@ciy.com', '$2y$10$YhQAqrV3MzFtCl6lm/jv7.98CHu1tlUul2Mk2uCx5o3Q7wbQeHLdq', 'chef_gordon.jpg', 'cover_gordon.jpg', 'Mastering flavor profile, techniques, and precision cooking. Cook it right!', 'chef', 'active'),
+(4, 'Admin User', 'admin_ciy', 'admin@ciy.com', '$2y$10$YhQAqrV3MzFtCl6lm/jv7.98CHu1tlUul2Mk2uCx5o3Q7wbQeHLdq', 'default_avatar.jpg', 'default_cover.jpg', 'CIY Platform Administrator.', 'admin', 'active');
 
 -- ------------------------------------------------------------
 -- SEED CATEGORIES

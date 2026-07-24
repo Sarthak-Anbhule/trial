@@ -347,3 +347,116 @@ a {
     padding: 10px 18px;
   }
 }
+
+/* --- Nav Icon Button & Universal Dark Mode Enhancements --- */
+.nav-icon-btn {
+  color: var(--text-main) !important;
+  background: transparent;
+  transition: var(--transition);
+}
+
+.nav-icon-btn:hover {
+  background: var(--primary-light) !important;
+  color: var(--primary) !important;
+}
+
+/* Dark Mode Comprehensive Form & Text Overrides */
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="dark"] .text-dark {
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .bg-light {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: var(--bg-card-solid) !important;
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+  background-color: var(--bg-card-solid) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-glass) !important;
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .input-group-text {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  color: var(--text-muted) !important;
+  border-color: var(--border-glass) !important;
+}
+
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--bg-card-solid) !important;
+  border-color: var(--border-glass) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+  background-color: var(--primary-light) !important;
+  color: var(--primary) !important;
+}
+
+[data-theme="dark"] .dropdown-item.active {
+  background-color: var(--primary-light) !important;
+  color: var(--primary) !important;
+}
+
+[data-theme="dark"] .dropdown-divider {
+  border-color: var(--border-subtle) !important;
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .offcanvas {
+  background-color: var(--bg-card-solid) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-glass) !important;
+}
+
+[data-theme="dark"] .table {
+  color: var(--text-main) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+[data-theme="dark"] .table th,
+[data-theme="dark"] .table td {
+  background-color: transparent !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary {
+  color: var(--text-muted) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+  color: var(--text-main) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+

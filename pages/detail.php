@@ -33,9 +33,21 @@ require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../includes/navbar.php';
 ?>
 
+<?php
+$translatedSteps = array_map(function($s) {
+    return [
+        'id' => $s['id'] ?? null,
+        'step_number' => $s['step_number'],
+        'title' => t_content($s['title'] ?: 'Step ' . $s['step_number']),
+        'instruction' => t_content($s['instruction']),
+        'time_minutes' => $s['time_minutes'] ?? 0
+    ];
+}, $recipe['steps']);
+?>
+
 <!-- Pass Recipe Step Data to JS for Cooking Mode -->
 <script>
-    window.CIY_RECIPE_STEPS = <?= json_encode($recipe['steps']) ?>;
+    window.CIY_RECIPE_STEPS = <?= json_encode($translatedSteps) ?>;
 </script>
 
 <div class="container py-5 my-4">
@@ -44,17 +56,17 @@ require_once __DIR__ . '/../includes/navbar.php';
         <div class="row align-items-center g-4">
             <div class="col-lg-6">
                 <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">
-                    <i class="fa-solid <?= e($recipe['category_icon']) ?> me-1"></i> <?= e($recipe['category_name']) ?>
+                    <i class="fa-solid <?= e($recipe['category_icon']) ?> me-1"></i> <?= t(slugify($recipe['category_name']), e($recipe['category_name'])) ?>
                 </span>
-                <h1 class="display-4 font-heading fw-bold mb-3"><?= e($recipe['title']) ?></h1>
-                <p class="text-muted lead mb-4"><?= e($recipe['description']) ?></p>
+                <h1 class="display-4 font-heading fw-bold mb-3"><?= t_content(e($recipe['title'])) ?></h1>
+                <p class="text-muted lead mb-4"><?= t_content(e($recipe['description'])) ?></p>
 
                 <!-- Author & Actions Row -->
                 <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
                     <a href="<?= BASE_URL ?>/pages/profile.php?username=<?= e($recipe['author_username']) ?>" class="d-flex align-items-center gap-2 text-decoration-none text-dark">
                         <img src="<?= $authorAvatar ?>" alt="<?= e($recipe['author_name']) ?>" class="rounded-circle border border-2 border-warning" style="width:44px; height:44px; object-fit:cover;">
                         <div>
-                            <div class="fw-bold small"><?= e($recipe['author_name']) ?></div>
+                            <div class="fw-bold small"><?= t_content(e($recipe['author_name'])) ?></div>
                             <small class="text-muted">@<?= e($recipe['author_username']) ?></small>
                         </div>
                     </a>
@@ -71,26 +83,26 @@ require_once __DIR__ . '/../includes/navbar.php';
                 <div class="row g-3 text-center mb-4">
                     <div class="col-3">
                         <div class="glass-card p-2">
-                            <small class="text-muted d-block">Prep Time</small>
-                            <span class="fw-bold"><?= $recipe['prep_time'] ?> min</span>
+                            <small class="text-muted d-block"><?= t('prep_time') ?></small>
+                            <span class="fw-bold"><?= $recipe['prep_time'] ?> <?= t('mins') ?></span>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="glass-card p-2">
-                            <small class="text-muted d-block">Cook Time</small>
-                            <span class="fw-bold"><?= $recipe['cook_time'] ?> min</span>
+                            <small class="text-muted d-block"><?= t('cook_time') ?></small>
+                            <span class="fw-bold"><?= $recipe['cook_time'] ?> <?= t('mins') ?></span>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="glass-card p-2">
-                            <small class="text-muted d-block">Servings</small>
+                            <small class="text-muted d-block"><?= t('servings') ?></small>
                             <span class="fw-bold"><?= $recipe['servings'] ?></span>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="glass-card p-2">
-                            <small class="text-muted d-block">Difficulty</small>
-                            <span class="fw-bold text-primary"><?= e($recipe['difficulty']) ?></span>
+                            <small class="text-muted d-block"><?= t('difficulty') ?></small>
+                            <span class="fw-bold text-primary"><?= t(strtolower($recipe['difficulty'] ?? 'easy'), e($recipe['difficulty'])) ?></span>
                         </div>
                     </div>
                 </div>
@@ -98,7 +110,7 @@ require_once __DIR__ . '/../includes/navbar.php';
                 <!-- CTA Row -->
                 <div class="d-flex flex-wrap gap-3">
                     <button id="btnStartCooking" class="btn-ciy-primary py-3 px-4">
-                        <i class="fa-solid fa-fire-burner me-2"></i> Start Cooking Mode
+                        <i class="fa-solid fa-fire-burner me-2"></i> <?= t('start_cooking') ?>
                     </button>
                     <button class="btn-ciy-outline btn-bookmark-action <?= !empty($recipe['is_bookmarked']) ? 'active' : '' ?>" data-recipe-id="<?= $recipe['id'] ?>">
                         <i class="<?= !empty($recipe['is_bookmarked']) ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark' ?>"></i> Save
@@ -122,13 +134,13 @@ require_once __DIR__ . '/../includes/navbar.php';
         <!-- Ingredients Checklist -->
         <div class="col-lg-4">
             <div class="glass-card p-4 sticky-top" style="top: 100px;">
-                <h4 class="font-heading fw-bold mb-3"><i class="fa-solid fa-basket-shopping text-primary me-2"></i> Ingredients</h4>
+                <h4 class="font-heading fw-bold mb-3"><i class="fa-solid fa-basket-shopping text-primary me-2"></i> <?= t('ingredients') ?></h4>
                 <ul class="list-group list-group-flush bg-transparent">
                     <?php foreach ($recipe['ingredients'] as $ing): ?>
                         <li class="list-group-item bg-transparent d-flex align-items-center gap-3 px-0 border-subtle">
                             <input class="form-check-input rounded-circle border-2" type="checkbox" id="ing_<?= $ing['id'] ?>">
                             <label class="form-check-label flex-grow-1 cursor-pointer" for="ing_<?= $ing['id'] ?>">
-                                <strong><?= e($ing['amount']) ?> <?= e($ing['unit']) ?></strong> <?= e($ing['name']) ?>
+                                <strong><?= e($ing['amount']) ?> <?= e($ing['unit']) ?></strong> <?= t_content(e($ing['name'])) ?>
                             </label>
                         </li>
                     <?php endforeach; ?>
@@ -140,7 +152,7 @@ require_once __DIR__ . '/../includes/navbar.php';
         <div class="col-lg-8">
             <!-- Nutrition Summary Cards -->
             <div class="glass-card p-4 mb-4">
-                <h5 class="font-heading fw-bold mb-3"><i class="fa-solid fa-chart-pie me-2 text-warning"></i> Nutrition per Serving</h5>
+                <h5 class="font-heading fw-bold mb-3"><i class="fa-solid fa-chart-pie me-2 text-warning"></i> <?= t('nutrition') ?></h5>
                 <div class="row g-2 text-center">
                     <div class="col-4 col-md"><div class="p-2 border rounded-3"><small class="text-muted d-block">Calories</small><strong><?= $recipe['nutrition']['calories'] ?> kcal</strong></div></div>
                     <div class="col-4 col-md"><div class="p-2 border rounded-3"><small class="text-muted d-block">Protein</small><strong><?= e($recipe['nutrition']['protein']) ?></strong></div></div>
@@ -152,7 +164,7 @@ require_once __DIR__ . '/../includes/navbar.php';
 
             <!-- Steps List -->
             <div class="glass-card p-4 mb-4">
-                <h4 class="font-heading fw-bold mb-4"><i class="fa-solid fa-list-check text-success me-2"></i> Step-by-Step Instructions</h4>
+                <h4 class="font-heading fw-bold mb-4"><i class="fa-solid fa-list-check text-success me-2"></i> <?= t('instructions') ?></h4>
                 <div class="d-flex flex-column gap-4">
                     <?php foreach ($recipe['steps'] as $step): ?>
                         <div class="step-item d-flex gap-3">
@@ -160,10 +172,10 @@ require_once __DIR__ . '/../includes/navbar.php';
                                 <?= $step['step_number'] ?>
                             </div>
                             <div class="flex-grow-1">
-                                <h6 class="font-heading fw-bold mb-1"><?= e($step['title'] ?: 'Step ' . $step['step_number']) ?></h6>
-                                <p class="text-muted mb-2"><?= e($step['instruction']) ?></p>
+                                <h6 class="font-heading fw-bold mb-1"><?= t_content(e($step['title'] ?: 'Step ' . $step['step_number'])) ?></h6>
+                                <p class="text-muted mb-2"><?= t_content(e($step['instruction'])) ?></p>
                                 <?php if (!empty($step['time_minutes'])): ?>
-                                    <small class="badge bg-light text-dark border"><i class="fa-regular fa-clock me-1"></i> Timer: <?= $step['time_minutes'] ?> mins</small>
+                                    <small class="badge bg-light text-dark border"><i class="fa-regular fa-clock me-1"></i> <?= t('cook_time') ?>: <?= $step['time_minutes'] ?> <?= t('mins') ?></small>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -173,7 +185,7 @@ require_once __DIR__ . '/../includes/navbar.php';
 
             <!-- Comments & Reviews Section -->
             <div class="glass-card p-4">
-                <h4 class="font-heading fw-bold mb-4"><i class="fa-solid fa-comments text-info me-2"></i> Community Reviews</h4>
+                <h4 class="font-heading fw-bold mb-4"><i class="fa-solid fa-comments text-info me-2"></i> <?= t('comments') ?></h4>
 
                 <?php if ($currentUserId): ?>
                     <!-- Comment Input Form -->
@@ -218,11 +230,18 @@ require_once __DIR__ . '/../includes/navbar.php';
 </div>
 
 <!-- FULLSCREEN COOKING MODE MODAL -->
-<div class="modal fade cooking-mode-modal" id="cookingModeModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade cooking-mode-modal" id="cookingModeModal" tabindex="-1" aria-hidden="true"
+     data-lang-step="<?= t('step_of') ?>"
+     data-lang-next="<?= t('next_step') ?>"
+     data-lang-prev="<?= t('prev_step') ?>"
+     data-lang-finish="<?= t('finish_cooking') ?>"
+     data-lang-start="<?= t('start_timer') ?>"
+     data-lang-pause="<?= t('pause_timer') ?>"
+     data-lang-completed="<?= t('cooking_completed') ?>">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content glass-card border-0">
             <div class="modal-header border-bottom p-4">
-                <h5 class="modal-title font-heading fw-bold text-primary"><i class="fa-solid fa-fire-burner me-2"></i> Cooking Mode - <?= e($recipe['title']) ?></h5>
+                <h5 class="modal-title font-heading fw-bold text-primary"><i class="fa-solid fa-fire-burner me-2"></i> <?= t('cooking_studio') ?> - <?= t_content(e($recipe['title'])) ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-4 p-md-5 d-flex flex-column justify-content-between">
@@ -232,25 +251,25 @@ require_once __DIR__ . '/../includes/navbar.php';
                         <div id="cookProgressBar" class="progress-bar bg-primary" style="width: 25%;"></div>
                     </div>
 
-                    <span id="cookStepCounter" class="badge bg-light text-primary border mb-3 fs-6 px-3 py-2 font-heading">Step 1 of 4</span>
+                    <span id="cookStepCounter" class="badge bg-light text-primary border mb-3 fs-6 px-3 py-2 font-heading"><?= t('step_of') ?> 1</span>
                     <h2 id="cookStepTitle" class="display-5 font-heading fw-bold mb-3">Step Title</h2>
                     <p id="cookStepInstruction" class="lead text-muted mb-4 fs-4">Step instructions here...</p>
                 </div>
 
                 <!-- Timer Controls Box -->
                 <div class="cooking-timer-box mx-auto my-4 w-100" style="max-width: 480px;">
-                    <small class="text-muted fw-bold d-block mb-1">STEP TIMER</small>
+                    <small class="text-muted fw-bold d-block mb-1"><?= t('timer') ?></small>
                     <div id="cookTimerDisplay" class="cooking-timer-display mb-3">05:00</div>
                     <div class="d-flex justify-content-center gap-3">
-                        <button id="cookToggleTimer" class="btn-ciy-primary py-2 px-4"><i class="fa-solid fa-play me-1"></i> Start Timer</button>
-                        <button id="cookResetTimer" class="btn-ciy-outline py-2 px-3"><i class="fa-solid fa-rotate-left"></i></button>
+                        <button id="cookToggleTimer" class="btn-ciy-primary py-2 px-4"><i class="fa-solid fa-play me-1"></i> <?= t('start_timer') ?></button>
+                        <button id="cookResetTimer" class="btn-ciy-outline py-2 px-3"><i class="fa-solid fa-rotate-left me-1"></i> <?= t('reset_timer') ?></button>
                     </div>
                 </div>
 
                 <!-- Bottom Step Navigation Row -->
                 <div class="d-flex align-items-center justify-content-between border-top pt-4">
-                    <button id="cookPrevStep" class="btn-ciy-outline py-3 px-4"><i class="fa-solid fa-arrow-left me-1"></i> Previous Step</button>
-                    <button id="cookNextStep" class="btn-ciy-primary py-3 px-5">Next Step <i class="fa-solid fa-arrow-right ms-1"></i></button>
+                    <button id="cookPrevStep" class="btn-ciy-outline py-3 px-4"><i class="fa-solid fa-arrow-left me-1"></i> <?= t('prev_step') ?></button>
+                    <button id="cookNextStep" class="btn-ciy-primary py-3 px-5"><?= t('next_step') ?> <i class="fa-solid fa-arrow-right ms-1"></i></button>
                 </div>
             </div>
         </div>

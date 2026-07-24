@@ -51,11 +51,16 @@ class CookingModeManager {
     }
 
     renderStep() {
+        const modalEl = document.getElementById('cookingModeModal');
+        const langStep = modalEl ? modalEl.dataset.langStep || 'Step' : 'Step';
+        const langNext = modalEl ? modalEl.dataset.langNext || 'Next Step →' : 'Next Step →';
+        const langFinish = modalEl ? modalEl.dataset.langFinish || 'Finish Cooking 🎉' : 'Finish Cooking 🎉';
+
         const step = this.steps[this.currentStep];
         if (!step) return;
 
-        document.getElementById('cookStepCounter').textContent = `Step ${this.currentStep + 1} of ${this.steps.length}`;
-        document.getElementById('cookStepTitle').textContent = step.title || `Step ${this.currentStep + 1}`;
+        document.getElementById('cookStepCounter').textContent = `${langStep} ${this.currentStep + 1} / ${this.steps.length}`;
+        document.getElementById('cookStepTitle').textContent = step.title || `${langStep} ${this.currentStep + 1}`;
         document.getElementById('cookStepInstruction').textContent = step.instruction;
 
         const progressPercent = ((this.currentStep + 1) / this.steps.length) * 100;
@@ -68,16 +73,17 @@ class CookingModeManager {
 
         // Control buttons state
         document.getElementById('cookPrevStep').disabled = (this.currentStep === 0);
-        document.getElementById('cookNextStep').textContent = (this.currentStep === this.steps.length - 1) ? 'Finish Cooking 🎉' : 'Next Step →';
+        document.getElementById('cookNextStep').textContent = (this.currentStep === this.steps.length - 1) ? langFinish : langNext;
     }
 
     nextStep() {
+        const modalEl = document.getElementById('cookingModeModal');
+        const langCompleted = modalEl ? modalEl.dataset.langCompleted || 'Bon Appétit! Cooking Completed!' : 'Bon Appétit! Cooking Completed!';
         if (this.currentStep < this.steps.length - 1) {
             this.currentStep++;
             this.renderStep();
         } else {
-            showToast('Cooking Complete! Bon Appétit! 👨‍🍳🔥');
-            const modalEl = document.getElementById('cookingModeModal');
+            showToast(langCompleted);
             const bsModal = bootstrap.Modal.getInstance(modalEl);
             if (bsModal) bsModal.hide();
         }
@@ -101,8 +107,10 @@ class CookingModeManager {
     startTimer() {
         if (this.timeLeft <= 0) return;
         this.isTimerRunning = true;
+        const modalEl = document.getElementById('cookingModeModal');
+        const langPause = modalEl ? modalEl.dataset.langPause || 'Pause Timer' : 'Pause Timer';
         const toggleBtn = document.getElementById('cookToggleTimer');
-        if (toggleBtn) toggleBtn.innerHTML = '<i class="fa-solid fa-pause"></i> Pause';
+        if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-pause me-1"></i> ${langPause}`;
 
         this.timerInterval = setInterval(() => {
             this.timeLeft--;
@@ -119,8 +127,10 @@ class CookingModeManager {
     stopTimer() {
         this.isTimerRunning = false;
         clearInterval(this.timerInterval);
+        const modalEl = document.getElementById('cookingModeModal');
+        const langStart = modalEl ? modalEl.dataset.langStart || 'Start Timer' : 'Start Timer';
         const toggleBtn = document.getElementById('cookToggleTimer');
-        if (toggleBtn) toggleBtn.innerHTML = '<i class="fa-solid fa-play"></i> Start Timer';
+        if (toggleBtn) toggleBtn.innerHTML = `<i class="fa-solid fa-play me-1"></i> ${langStart}`;
     }
 
     resetTimer() {

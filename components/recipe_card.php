@@ -27,7 +27,7 @@ $avgRating = isset($recipe['avg_rating']) ? number_format((float)$recipe['avg_ra
 
         <!-- Time Badge -->
         <span class="recipe-badge-time">
-            <i class="fa-regular fa-clock text-warning"></i> <?= $totalTime ?> min
+            <i class="fa-regular fa-clock text-warning"></i> <?= $totalTime ?> <?= t('mins') ?>
         </span>
     </div>
 
@@ -38,16 +38,16 @@ $avgRating = isset($recipe['avg_rating']) ? number_format((float)$recipe['avg_ra
             <img src="<?= $authorAvatar ?>" alt="<?= e($recipe['author_name']) ?>" class="recipe-author-avatar">
             <span class="small fw-semibold text-muted text-truncate me-auto">
                 <a href="<?= BASE_URL ?>/pages/profile.php?username=<?= e($recipe['author_username']) ?>" class="text-reset hover-primary">
-                    <?= e($recipe['author_name']) ?>
+                    <?= t_content(e($recipe['author_name'])) ?>
                 </a>
             </span>
-            <span class="badge rounded-pill bg-light text-dark border small fw-normal"><?= e($recipe['difficulty'] ?? 'Easy') ?></span>
+            <span class="badge rounded-pill bg-light text-dark border small fw-normal"><?= t(strtolower($recipe['difficulty'] ?? 'easy'), e($recipe['difficulty'] ?? 'Easy')) ?></span>
         </div>
 
         <!-- Recipe Title -->
         <h5 class="font-heading fw-bold mb-2 fs-6">
             <a href="<?= BASE_URL ?>/pages/detail.php?id=<?= $recipe['id'] ?>" class="text-reset hover-primary">
-                <?= e($recipe['title']) ?>
+                <?= t_content(e($recipe['title'])) ?>
             </a>
         </h5>
 
