@@ -460,3 +460,40 @@ a {
   filter: invert(1) grayscale(100%) brightness(200%);
 }
 
+/* Enhanced High-Contrast Dark Mode Rules for Ingredients, Steps & Recipe Details */
+[data-theme="dark"] .list-group-item,
+[data-theme="dark"] .form-check-label,
+[data-theme="dark"] .form-check-label strong,
+[data-theme="dark"] label,
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, 
+[data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6 {
+  color: var(--text-main) !important;
+}
+
+[data-theme="dark"] .form-check-input {
+  background-color: var(--bg-card-solid) !important;
+  border-color: var(--primary) !important;
+}
+
+[data-theme="dark"] .form-check-input:checked {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+[data-theme="dark"] .border-subtle {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+[data-theme="dark"] .step-item p {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .step-item h6 {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .glass-card strong {
+  color: #f8fafc !important;
+}
+
+
